@@ -1,0 +1,29 @@
+PUBLICAR (Cloudflare Pages, plano gratuito)
+1. Crie conta em cloudflare.com e instale o Wrangler: npm i -g wrangler ; wrangler login
+2. Crie o banco:        wrangler d1 create vittoria-agenda
+3. Crie wrangler.toml nesta pasta com:
+     name = "vittoria-lash"
+     pages_build_output_dir = "."
+     compatibility_date = "2026-01-01"
+     [[d1_databases]]
+     binding = "DB"
+     database_name = "vittoria-agenda"
+     database_id = "ID_QUE_O_PASSO_2_MOSTROU"
+4. Crie as tabelas:     wrangler d1 execute vittoria-agenda --remote --file=schema.sql
+5. Publique:            wrangler pages deploy .
+6. Defina a senha da designer: wrangler pages secret put ADMIN_PASSWORD --project-name vittoria-lash
+7. No painel da Cloudflare, em Pages > Domínios personalizados, adicione seu domínio
+   (ou um subdomínio, ex.: agenda.seudominio.com.br).
+Painel da designer: /admin.html   |   Agendamento do cliente: /agendar.html
+Fotos da galeria: coloque em /fotos e liste em fotos.json, ex.: [{"arquivo":"cilios1.jpg","descricao":"Volume brasileiro"}]
+Depois troque SEU-DOMINIO.com.br no index.html e inclua o Logo.png nesta pasta.
+
+COMO O FLUXO FUNCIONA
+ 1. Cliente reserva em /agendar.html e e levada ao WhatsApp da Vittoria com os dados do pedido.
+ 2. No painel (/admin.html), a Vittoria clica em Confirmar. O horario fica como Confirmado e abre o WhatsApp
+    da cliente com a mensagem pronta: "Ola, NOME! Seu horario ... esta confirmado ...".
+ Horarios aguardando ou confirmados ficam bloqueados para outras pessoas. Cancelar libera o horario.
+
+SE VOCE JA CRIOU O BANCO ANTES DESTA VERSAO, rode no D1 (wrangler d1 execute vittoria-agenda --remote --command "...") :
+   DROP INDEX IF EXISTS uq_slot;
+   CREATE UNIQUE INDEX uq_slot ON agendamentos(data,horario) WHERE status IN ('ativo','confirmado');

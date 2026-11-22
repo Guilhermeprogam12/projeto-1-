@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel | Vittória Lash Studio</title><meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23fdfbf6'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' font-style='italic' text-anchor='middle' fill='%23c9a24b'%3EV%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/estilo.css"><style>main{max-width:980px}.band a{display:none}input[type=checkbox]{accent-color:#5e2233}</style></head><body><header class="band"><p class="script">Vittória</p><h1>Painel de agendamentos</h1><p>Área da designer</p></header><main>
+<form class="box" id="login"><label>Senha<input type="password" id="pw" autocomplete="current-password" required></label><p class="msg erro" id="m" role="alert"></p><button class="btn">Entrar</button></form>
+<section id="painel" hidden>
+  <div class="stats"><div class="stat"><b id="sHoje">0</b><span>Hoje</span></div><div class="stat"><b id="sSemana">0</b><span>Próximos 7 dias</span></div><div class="stat"><b id="sTotal">0</b><span>Aguardando confirmação</span></div></div>
+  <p><label style="display:inline-flex;flex-direction:row;gap:.5rem;align-items:center"><input type="checkbox" id="canc"> Mostrar cancelados</label> <button class="btn sec" id="sair" type="button">Sair</button></p>
+  <div class="wrap"><table><thead><tr><th>Data</th><th>Hora</th><th>Cliente</th><th>Telefone</th><th>Serviço</th><th>Obs.</th><th>Status</th><th>Ações</th></tr></thead><tbody id="tb"></tbody></table></div>
+  <p id="vazio" hidden>Nenhum agendamento.</p>
+</section>
+<script>
+let senha=sessionStorage.getItem("pw")||"",lista=[];
+const H=()=>({Authorization:"Bearer "+senha,"Content-Type":"application/json"});
+const dbr=v=>v.split("-").reverse().join("/");
+async function carregar(){
+  const r=await fetch("/api/admin",{headers:H()});
+  if(!r.ok){sessionStorage.removeItem("pw");login.hidden=false;painel.hidden=true;m.textContent=r.status===401?"Senha incorreta.":"Erro ao carregar.";return}
+  lista=(await r.json()).agendamentos;login.hidden=true;painel.hidden=false;desenha();
+}
+function desenha(){
+  tb.innerHTML="";
+  const ativos=lista.filter(a=>a.status!=="cancelado"),h=new Date().toLocaleDateString("en-CA",{timeZone:"America/Sao_Paulo"}),lim=new Date(h+"T12:00:00Z");lim.setUTCDate(lim.getUTCDate()+7);const l7=lim.toISOString().slice(0,10);
+  sHoje.textContent=ativos.filter(a=>a.data===h).length;sSemana.textContent=ativos.filter(a=>a.data>=h&&a.data<=l7).length;sTotal.textContent=lista.filter(a=>a.status==="ativo"&&a.data>=h).length;
+  const v=lista.filter(a=>canc.checked||a.status!=="cancelado");vazio.hidden=v.length>0;
+  v.forEach(a=>{
+    const tr=document.createElement("tr");if(a.status!=="ativo")tr.className="cancel";
+    [dbr(a.data),a.horario,a.nome,a.telefone,a.servico,a.obs||""].forEach((x,i)=>{const td=document.createElement("td");
+      if(i===3){const l=document.createElement("a");l.href="https://wa.me/55"+x.replace(/\D/g,"");l.target="_blank";l.rel="noopener";l.textContent=x;td.appendChild(l)}else td.textContent=x;tr.appendChild(td)});
+    const rot={ativo:"Aguardando",confirmado:"Confirmado",cancelado:"Cancelado"};
+    const ts=document.createElement("td"),bd=document.createElement("span");bd.className="badge "+a.status;bd.textContent=rot[a.status];ts.appendChild(bd);tr.appendChild(ts);
+    const td=document.createElement("td");td.className="acoes";
+    const zap=()=>{const dd=dbr(a.data);return"https://wa.me/55"+a.telefone.replace(/\D/g,"")+"?text="+encodeURIComponent("Olá, "+a.nome+"! Seu horário na Vittória Lash Studio está confirmado: "+a.servico+", "+dd+" às "+a.horario+". Te esperamos!")};
+    const muda=async(status)=>{const r=await fetch("/api/admin",{method:"POST",headers:H(),body:JSON.stringify({id:a.id,status})});if(!r.ok){alert((await r.json()).erro||"Erro");return false}return true};
+    const btn=(t,fn)=>{const b=document.createElement("button");b.className="btn sec";b.type="button";b.textContent=t;b.onclick=fn;td.appendChild(b)};
+    if(a.status==="ativo")btn("Confirmar",async()=>{
+      const w=window.open("about:blank","_blank");   // abre antes do envio para o navegador não bloquear
+      if(await muda("confirmado")){if(w)w.location=zap();else location.href=zap()}else if(w)w.close();
+      carregar();
+    });
+    if(a.status==="confirmado")btn("Reenviar aviso",()=>window.open(zap(),"_blank"));
+    if(a.status!=="cancelado")btn("Cancelar",async()=>{if(!confirm("Cancelar o horário de "+a.nome+"?"))return;if(await muda("cancelado"))carregar()});
+    else btn("Reativar",async()=>{if(await muda("ativo"))carregar()});
+    tr.appendChild(td);tb.appendChild(tr);
+  });
+}
+login.addEventListener("submit",e=>{e.preventDefault();senha=pw.value;sessionStorage.setItem("pw",senha);m.textContent="";carregar()});
+canc.addEventListener("change",desenha);
+sair.onclick=()=>{sessionStorage.removeItem("pw");location.reload()};
+if(senha)carregar();
+</script></main></body></html>

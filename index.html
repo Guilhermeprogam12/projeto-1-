@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vittória Lash Studio | Extensão de cílios, lash lifting e sobrancelhas</title>
+<meta name="description" content="Vittória Lash Studio: extensão de cílios, lash lifting e design de sobrancelhas. Agende pelo site e confirme direto no WhatsApp.">
+<!-- Troque SEU-DOMINIO.com.br pelo domínio registrado -->
+<meta name="theme-color" content="#fdfbf6">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Vittória Lash Studio"><meta property="og:description" content="Extensão de cílios, lash lifting e design de sobrancelhas. Agende online.">
+<meta property="og:url" content="https://SEU-DOMINIO.com.br/"><meta property="og:image" content="https://SEU-DOMINIO.com.br/Logo.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BeautySalon","name":"Vittória Lash Studio","telephone":"+55-16-99355-4033","url":"https://SEU-DOMINIO.com.br/","image":"https://SEU-DOMINIO.com.br/Logo.png","openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"09:00","closes":"19:00"}]}</script>
+<link rel="canonical" href="https://SEU-DOMINIO.com.br/">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23fdfbf6'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' font-style='italic' text-anchor='middle' fill='%23c9a24b'%3EV%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#fdfbf6;--cream-deep:#f6efe1;--ink:#2b2620;--ink-soft:#5c5347;--gold-dark:#8a6a26;--gold:#c9a24b;--gold-light:#e8cd8a;--gold-line:rgba(201,162,75,.35);--radius:4px;--display:'Playfair Display','Times New Roman',serif;--script:'Alex Brush',cursive;--body:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.6}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--gold-dark);outline-offset:2px}
+.eyebrow{display:block;font-style:italic;letter-spacing:.18em;text-transform:uppercase;font-size:.85rem;color:var(--gold-dark);margin-bottom:.6rem}
+.center{text-align:center}
+.title{font-family:var(--display);font-weight:600;font-size:clamp(2rem,4vw,2.8rem);margin:0 0 1.2rem}
+.text{color:var(--ink-soft);font-size:1.15rem;max-width:46ch}
+.btn{display:inline-block;padding:.9rem 2rem;border-radius:var(--radius);font-family:var(--body);font-size:1rem;letter-spacing:.05em;border:1px solid transparent;cursor:pointer;transition:background .2s,color .2s}
+.btn--gold{background:var(--gold-dark);color:#fff}
+.btn--gold:hover{background:#6f5419}
+.btn--outline{border-color:var(--gold-dark);color:var(--gold-dark)}
+.btn--outline:hover{background:var(--gold-dark);color:#fff}
+.btn--ghost{border-color:var(--gold-line);padding:.65rem 1.4rem;font-size:.9rem}
+.btn--ghost:hover{border-color:var(--gold-dark);color:var(--gold-dark)}
+.header{position:sticky;top:0;z-index:50;background:rgba(253,251,246,.95);border-bottom:1px solid var(--gold-line)}
+.header__inner{max-width:1180px;margin:0 auto;padding:.6rem 1.5rem;display:flex;align-items:center;gap:1.5rem}
+.brand__logo{height:58px;width:auto}
+.nav{display:flex;gap:1.8rem;margin-left:auto}
+.nav a{font-size:.95rem;letter-spacing:.04em;color:var(--ink-soft)}
+.nav a:hover{color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:6px}
+.menu-toggle{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:6px;margin-left:auto}
+.menu-toggle span{width:24px;height:2px;background:var(--ink)}
+.hero{min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5rem 1.5rem;background:radial-gradient(60% 50% at 50% 20%,rgba(232,205,138,.22),transparent 70%),var(--cream);animation:fade .8s ease both}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.hero__eyebrow{font-style:italic;letter-spacing:.15em;color:var(--gold-dark);text-transform:uppercase;font-size:.85rem;margin:0 0 1.2rem}
+.hero__title{margin:0 0 1.4rem;display:flex;flex-direction:column;align-items:center;line-height:1;font-weight:400}
+.hero__title span{font-family:var(--script);color:var(--gold-dark)}
+.hero__title span:first-child{font-size:clamp(3.5rem,11vw,7rem)}
+.hero__title span:last-child{font-size:clamp(2rem,6vw,3.4rem)}
+.hero__subtitle{max-width:44ch;color:var(--ink-soft);font-size:1.2rem;margin:0 0 2.2rem}
+.hero__actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.section{max-width:1180px;margin:0 auto;padding:6rem 1.5rem}
+.grid2{display:grid;grid-template-columns:.8fr 1.2fr;gap:4rem;align-items:center}
+.about__frame{background:var(--cream-deep);border:1px solid var(--gold-line);border-radius:var(--radius);padding:2.5rem}
+.about__logo{max-width:260px;margin:0 auto}
+.band{background:var(--cream-deep);max-width:none}
+.band>*{max-width:1180px;margin-left:auto;margin-right:auto}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin-top:3rem}
+.card{background:var(--cream);border:1px solid var(--gold-line);border-radius:var(--radius);padding:2.2rem 1.8rem}
+.card h3{font-family:var(--display);font-size:1.3rem;margin:0 0 .6rem}
+.card p{color:var(--ink-soft);font-size:1.05rem;margin:0}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.gallery__item{overflow:hidden;border-radius:var(--radius);aspect-ratio:1/1;background:var(--cream-deep)}
+.gallery__item img,.gallery__item video{width:100%;height:100%;object-fit:cover}
+.gallery__empty{grid-column:1/-1;text-align:center;color:var(--ink-soft);font-style:italic}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.6rem;margin:3rem 0 0;padding:0}.steps li{border-top:2px solid var(--gold);padding-top:1rem}.steps strong{display:block;font-family:var(--display);font-size:1.2rem;margin-bottom:.3rem}.steps span{color:var(--ink-soft)}.skip{position:absolute;left:-999px}.skip:focus{left:1rem;top:1rem;background:#fff;padding:.5rem 1rem;z-index:99}.booking{max-width:780px;margin:0 auto;background:var(--cream);border:1px solid var(--gold-line);border-radius:var(--radius);padding:3rem clamp(1.5rem,5vw,4rem);text-align:center}
+.booking__intro{color:var(--ink-soft);max-width:50ch;margin:0 auto 2.2rem}
+.form{text-align:left;display:flex;flex-direction:column;gap:1.2rem}
+.form__row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.field{display:flex;flex-direction:column;gap:.4rem;font-size:.9rem;color:var(--ink-soft)}
+.field input,.field select{font-family:var(--body);font-size:1rem;padding:.75rem .9rem;border:1px solid var(--gold-line);border-radius:var(--radius);background:var(--cream);color:var(--ink)}
+.consent{display:flex;gap:.6rem;align-items:flex-start;font-size:.95rem;color:var(--ink-soft)}
+.consent input{margin-top:.35rem}
+.consent a{text-decoration:underline}
+.form__note{text-align:center;font-size:.85rem;color:var(--ink-soft);margin:0}
+.form__feedback{text-align:center;font-size:.95rem;margin:0;min-height:1.3em}
+.form__feedback.erro{color:#a33d3d}.form__feedback.sucesso{color:#3c7a4b}
+.form button[disabled]{opacity:.6;cursor:not-allowed}
+.footer{background:var(--ink);color:var(--cream);padding:3.5rem 1.5rem 1.5rem}
+.footer__inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:2rem;flex-wrap:wrap}
+.footer__info{flex:1;min-width:220px}
+.footer__title{font-family:var(--display);font-size:1.3rem;margin:0 0 .4rem;color:var(--gold-light)}
+.footer a:hover{color:var(--gold-light)}
+.footer p{margin:0 0 .3rem}
+.footer__small{color:rgba(253,251,246,.7);font-size:.9rem}
+.footer .btn--outline{border-color:var(--gold-light);color:var(--gold-light)}
+.footer .btn--outline:hover{background:var(--gold-light);color:var(--ink)}
+.footer__copy{text-align:center;color:rgba(253,251,246,.6);font-size:.85rem;margin:2.5rem 0 0}
+.footer__copy a{text-decoration:underline;margin:0 .5rem}
+.whatsapp-float{position:fixed;bottom:1.6rem;right:1.6rem;width:56px;height:56px;border-radius:50%;background:#1fa855;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 16px rgba(0,0,0,.25);z-index:60}
+@media(max-width:900px){.grid2{grid-template-columns:1fr;gap:2.5rem}.cards,.gallery{grid-template-columns:repeat(2,1fr)}.form__row{grid-template-columns:1fr}}
+@media(max-width:760px){.nav,.header__cta{display:none}.menu-toggle{display:flex}.header.open .nav{display:flex;flex-direction:column;position:absolute;top:100%;left:0;right:0;background:var(--cream);padding:1.5rem;border-bottom:1px solid var(--gold-line);gap:1rem}}
+@media(max-width:760px){.steps{grid-template-columns:1fr}}@media(max-width:560px){.cards,.gallery{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<a class="skip" href="#topo">Pular para o conteúdo</a>
+<header class="header" id="header">
+  <div class="header__inner">
+    <a href="#topo" class="brand"><img src="Logo.png" alt="Vittória Lash Studio" class="brand__logo"></a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#sobre">Sobre</a><a href="#servicos">Serviços</a><a href="#galeria">Galeria</a><a href="agendar.html">Agendar</a><a href="#contato">Contato</a>
+    </nav>
+    <a href="agendar.html" class="btn btn--ghost header__cta">Agendar horário</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="hero">
+    <p class="hero__eyebrow">Extensão de cílios, lash lifting e sobrancelhas</p>
+    <h1 class="hero__title"><span>Vittória</span><span>Lash Studio</span></h1>
+    <p class="hero__subtitle">Escolha o serviço, a data e o horário no formulário. Seu pedido segue para o WhatsApp da Vittória para confirmação. Atendimento de terça a sábado, das 9h às 19h.</p>
+    <div class="hero__actions">
+      <a href="agendar.html" class="btn btn--gold">Agendar horário</a>
+      <a href="#galeria" class="btn btn--outline">Ver trabalhos</a>
+    </div>
+  </section>
+
+  <section class="section" id="sobre">
+    <div class="grid2">
+      <div class="about__frame"><img src="Logo.png" alt="Logo da Vittória Lash Studio" class="about__logo"></div>
+      <div>
+        <span class="eyebrow">Sobre o studio</span>
+        <h2 class="title">Sobre a Vittória</h2>
+        <p class="text">A Vittória Lash Studio nasceu para transformar o momento de cuidar da beleza em um ritual de calma e autoestima. Cada procedimento é pensado no formato do seu rosto, no seu estilo e no efeito que você quer levar para o dia a dia.</p>
+        <p class="text">Materiais de qualidade, técnica atualizada e um espaço pensado para o seu conforto do início ao fim do atendimento.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band" id="servicos">
+    <span class="eyebrow center">Serviços</span>
+    <h2 class="title center">O que fazemos</h2>
+    <div class="cards">
+      <article class="card"><h3>Volume Brasileiro</h3><p>Efeito marcante e definido, com fios que dão volume sem pesar no olhar.</p></article>
+      <article class="card"><h3>Fio a Fio</h3><p>Resultado natural e delicado, fio aplicado individualmente sobre o cílio.</p></article>
+      <article class="card"><h3>Volume Egípcio</h3><p>Leques abertos que alongam e realçam o formato dos olhos.</p></article>
+      <article class="card"><h3>Lash Lifting</h3><p>Curvatura e alongamento nos cílios naturais, com efeito de máscara todos os dias.</p></article>
+      <article class="card"><h3>Design de Sobrancelhas</h3><p>Harmonização do olhar com o design ideal para o seu rosto.</p></article>
+      <article class="card"><h3>Manutenção</h3><p>Retoque para manter o efeito das extensões sempre impecável.</p></article>
+    </div>
+  </section>
+
+  <section class="section" id="como-funciona">
+    <span class="eyebrow center">Como funciona</span>
+    <h2 class="title center">Agendar leva um minuto</h2>
+    <ol class="steps">
+      <li><strong>1. Escolha</strong><span>Selecione o serviço e a data no agendamento online.</span></li>
+      <li><strong>2. Reserve</strong><span>Veja os horários livres e confirme com nome e telefone.</span></li>
+      <li><strong>3. Compareça</strong><span>Precisando remarcar, avise a Vittória pelo WhatsApp.</span></li>
+    </ol>
+  </section>
+
+  <section class="section" id="galeria">
+    <span class="eyebrow center">Galeria</span>
+    <h2 class="title center">Trabalhos realizados</h2>
+    <div class="gallery" id="galleryGrid"><p class="gallery__empty" id="galleryEmpty">Em breve, novas fotos por aqui.</p></div>
+  </section>
+
+  <section class="section band" id="agendar">
+    <div class="booking">
+      <span class="eyebrow center">Agendamento online</span>
+      <h2 class="title center">Reserve seu horário</h2>
+      <p class="booking__intro">Informe nome, telefone, data e horário. Os horários já ocupados aparecem bloqueados, então você só escolhe o que está livre.</p>
+      <a href="agendar.html" class="btn btn--gold">Ir para o agendamento</a>
+      <p class="form__note" style="margin-top:1.4rem">Prefere conversar? <a href="https://wa.me/5516993554033" target="_blank" rel="noopener" style="text-decoration:underline">Chame no WhatsApp</a>.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" id="contato">
+  <div class="footer__inner">
+    <div class="footer__info">
+      <p class="footer__title">Vittória Lash Studio</p>
+      <p><a href="https://wa.me/5516993554033" target="_blank" rel="noopener">(16) 99355-4033</a></p>
+      <p class="footer__small">Terça a sábado, 09h às 19h</p>
+      <p class="footer__small">Desenvolvido por Guilherme Lucas Fontelas Garcia</p>
+    </div>
+    <a href="agendar.html" class="btn btn--outline">Agendar horário</a>
+  </div>
+  <p class="footer__copy">© <span id="year">2026</span> Vittória Lash Studio. Todos os direitos reservados.<br><a href="privacidade.html">Política de Privacidade</a><a href="termos.html">Termos e Condições</a></p>
+</footer>
+
+<a href="https://wa.me/5516993554033" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Falar no WhatsApp">
+  <svg viewBox="0 0 32 32" width="28" height="28" fill="currentColor" aria-hidden="true"><path d="M16 3C9 3 3.3 8.7 3.3 15.7c0 2.5.7 4.8 1.9 6.9L3 29l6.6-2.1c2 1.1 4.2 1.7 6.4 1.7 7 0 12.7-5.7 12.7-12.7C28.7 8.7 23 3 16 3zm0 23.1c-2 0-3.9-.5-5.6-1.5l-.4-.2-4 1.3 1.3-3.9-.3-.4c-1.2-1.8-1.8-3.9-1.8-6 0-6 4.9-10.9 10.9-10.9S26.9 9.7 26.9 15.7 22 26.1 16 26.1zm6-8.2c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1.1-1 1.3-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-2-1.8-2.3-.2-.3 0-.5.1-.7.1-.1.3-.4.5-.5.2-.2.2-.3.3-.5.1-.2 0-.4 0-.6-.1-.2-.7-1.8-1-2.4-.3-.6-.5-.6-.7-.6h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.2 3.4 5.3 4.7.7.3 1.3.5 1.8.7.7.2 1.4.2 1.9.1.6-.1 1.9-.8 2.1-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.2-.6-.4z"/></svg>
+</a>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("year").textContent=new Date().getFullYear();
+  const h=document.getElementById("header"),b=document.getElementById("menuToggle");
+  b.addEventListener("click",()=>{const a=h.classList.toggle("open");b.setAttribute("aria-expanded",a)});
+  document.querySelectorAll(".nav a").forEach(l=>l.addEventListener("click",()=>{h.classList.remove("open");b.setAttribute("aria-expanded","false")}));
+  carregarGaleria();
+});
+// Para publicar fotos: coloque os arquivos na pasta /fotos e liste em fotos.json
+async function carregarGaleria(){
+  const g=document.getElementById("galleryGrid");
+  try{
+    const r=await fetch("fotos.json");if(!r.ok)return;
+    const lista=await r.json();if(!lista.length)return;
+    g.innerHTML="";
+    lista.forEach(f=>{
+      const d=document.createElement("div");d.className="gallery__item";
+      const video=/\.(mp4|webm)$/i.test(f.arquivo);
+      const el=document.createElement(video?"video":"img");
+      el.src="fotos/"+f.arquivo;
+      if(video){el.controls=true;el.muted=true;el.playsInline=true;el.preload="metadata"}
+      else{el.alt=f.descricao||"Trabalho realizado na Vittória Lash Studio";el.loading="lazy"}
+      d.appendChild(el);g.appendChild(d);
+    });
+  }catch(e){console.error(e)}
+}
+</script>
+</body>
+</html>

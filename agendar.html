@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agendar horário | Vittória Lash Studio</title><meta name="robots" content="noindex">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23fdfbf6'/%3E%3Ctext x='32' y='47' font-family='Georgia,serif' font-size='44' font-style='italic' text-anchor='middle' fill='%23c9a24b'%3EV%3C/text%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cormorant+Garamond:wght@400;500;600&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/estilo.css"></head><body>
+<header class="band"><a href="index.html">Voltar ao site</a><p class="script">Vittória</p><h1>Agende seu horário</h1><p>Lash Studio · terça a sábado, das 9h às 19h</p></header>
+<main>
+<form class="box" id="f" novalidate>
+  <fieldset><legend><span class="n">1</span>Seus dados</legend>
+    <div class="row">
+      <label>Nome completo<input name="nome" required autocomplete="name" minlength="3"></label>
+      <label>Telefone com DDD<input name="telefone" type="tel" required autocomplete="tel" placeholder="(16) 90000-0000" inputmode="tel"></label>
+    </div>
+  </fieldset>
+  <fieldset><legend><span class="n">2</span>Escolha o serviço</legend>
+    <div class="svc">
+      <label><input type="radio" name="servico" value="Volume Brasileiro" required>Volume Brasileiro</label>
+      <label><input type="radio" name="servico" value="Fio a Fio">Fio a Fio</label>
+      <label><input type="radio" name="servico" value="Volume Egípcio">Volume Egípcio</label>
+      <label><input type="radio" name="servico" value="Lash Lifting">Lash Lifting</label>
+      <label><input type="radio" name="servico" value="Design de Sobrancelhas">Design de Sobrancelhas</label>
+      <label><input type="radio" name="servico" value="Manutenção">Manutenção</label>
+      <label><input type="radio" name="servico" value="Outro">Outro</label>
+    </div>
+  </fieldset>
+  <fieldset><legend><span class="n">3</span>Data e horário</legend>
+    <label>Data<input name="data" id="data" type="date" required></label>
+    <div id="slotsBox" hidden>
+      <p class="legenda"><span><i class="dot" style="background:var(--sage-bg);border:1.5px solid var(--sage)"></i>Livre</span><span><i class="dot" style="background:var(--wine)"></i>Escolhido</span><span><i class="dot" style="background:#f0ebe4;border:1.5px solid #d8cfc4"></i>Ocupado</span></p>
+      <div class="slots" id="slots" role="group" aria-label="Horários"></div>
+    </div>
+    <label>Observações (opcional)<input name="observacoes" maxlength="300" placeholder="Alguma preferência ou dúvida?"></label>
+  </fieldset>
+  <label class="consent"><input type="checkbox" name="aceite" required><span>Li e concordo com a <a href="privacidade.html" target="_blank" rel="noopener">Política de Privacidade</a> e os <a href="termos.html" target="_blank" rel="noopener">Termos e Condições</a>.</span></label>
+  <div class="resumo" id="res">Escolha o serviço, a data e o horário para ver o resumo.</div>
+  <p class="msg" id="msg" role="status"></p>
+  <button class="btn" id="btn" disabled>Confirmar agendamento</button>
+</form>
+<div class="box" id="done" hidden><h2 style="font-family:'Playfair Display',serif;color:var(--wine);margin-top:0">Horário reservado</h2><p id="resumo"></p><p>Estamos abrindo o WhatsApp da Vittória com os dados do seu pedido. Falta só tocar em enviar. O horário fica confirmado quando ela responder.</p><a class="btn wa" id="wa" target="_blank" rel="noopener">Abrir WhatsApp da Vittória</a></div>
+</main>
+<script>
+const f=document.getElementById("f"),msg=document.getElementById("msg"),btn=document.getElementById("btn"),slots=document.getElementById("slots"),res=document.getElementById("res");
+let escolhido="";
+const hoje=new Date().toLocaleDateString("en-CA",{timeZone:"America/Sao_Paulo"});
+const max=new Date(hoje+"T12:00:00Z");max.setUTCDate(max.getUTCDate()+90);
+data.min=hoje;data.max=max.toISOString().slice(0,10);
+const dbr=v=>v.split("-").reverse().join("/");
+const servico=()=>(f.querySelector("input[name=servico]:checked")||{}).value||"";
+function aviso(t,c){msg.textContent=t;msg.className="msg "+(c||"")}
+function atualiza(){
+  btn.disabled=!escolhido;
+  const p=[];if(servico())p.push("<strong>"+servico()+"</strong>");
+  if(data.value)p.push(dbr(data.value));if(escolhido)p.push("às "+escolhido);
+  res.innerHTML=p.length?p.join(" · "):"Escolha o serviço, a data e o horário para ver o resumo.";
+}
+f.addEventListener("change",atualiza);
+data.addEventListener("change",async()=>{
+  escolhido="";slots.innerHTML="";aviso("");atualiza();
+  if(!data.value)return;
+  const dow=new Date(data.value+"T12:00:00Z").getUTCDay();
+  if(dow<2||dow>6){aviso("Não atendemos nesse dia. Escolha de terça a sábado.","erro");slotsBox.hidden=true;return}
+  try{
+    const r=await fetch("/api/horarios?data="+data.value),j=await r.json();
+    if(!r.ok){aviso(j.erro,"erro");slotsBox.hidden=true;return}
+    slotsBox.hidden=false;
+    j.horarios.forEach(h=>{
+      const b=document.createElement("button");b.type="button";b.className="slot";b.textContent=h.horario;b.disabled=!h.livre;b.setAttribute("aria-pressed","false");
+      b.onclick=()=>{slots.querySelectorAll(".slot").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");escolhido=h.horario;atualiza()};
+      slots.appendChild(b);
+    });
+    if(j.horarios.every(h=>!h.livre))aviso("Todos os horários desse dia estão ocupados. Escolha outra data.","erro");
+  }catch{aviso("Não foi possível carregar os horários. Tente de novo.","erro")}
+});
+f.addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!f.reportValidity())return;
+  const d=new FormData(f),c={nome:d.get("nome"),telefone:d.get("telefone"),servico:servico(),data:d.get("data"),horario:escolhido,observacoes:d.get("observacoes"),aceite:f.aceite.checked};
+  btn.disabled=true;aviso("Reservando...");
+  try{
+    const r=await fetch("/api/agendar",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(c)}),j=await r.json();
+    if(!r.ok){aviso(j.erro||"Erro ao agendar.","erro");if(r.status===409)data.dispatchEvent(new Event("change"));else btn.disabled=false;return}
+    const t=`${c.servico}, ${dbr(c.data)} às ${c.horario}, em nome de ${c.nome}.`;
+    resumo.textContent=t;
+    const link="https://wa.me/5516993554033?text="+encodeURIComponent("Olá, Vittória! Fiz um pedido de horário pelo site e aguardo sua confirmação: "+t);
+    wa.href=link;f.hidden=true;done.hidden=false;window.scrollTo(0,0);
+    setTimeout(()=>{location.href=link},1500);
+  }catch{aviso("Sem conexão. Tente novamente.","erro");btn.disabled=false}
+});
+</script></body></html>
